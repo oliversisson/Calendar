@@ -13,6 +13,8 @@
     return NAMES_OF_MONTHS[month];
   }
 
+  // For a given year, returns an array with the name of each month and its
+  // number of days. Eg [[January,31],[February,28],...]
   var getNamesAndDaysOfMonths = function(year) {
     var monthNameWithNumberOfDays = function(name, index) {
       var lastDayOfMonth = new Date(year, index + 1, 0);
@@ -22,12 +24,14 @@
     return NAMES_OF_MONTHS.map(monthNameWithNumberOfDays);
   };
 
+  // Sort dates by year, then month, then day.
   var sortEventByDate  = function(eventA, eventB) {
     if(eventA.year != eventB.year) return eventA.year - eventB.year;
     if(eventA.month != eventB.month) return eventA.month - eventB.month;
     return eventA.day - eventB.day;
   };
 
+  // Returns the date of the first event of a calendar year.
   var getDateOfFirstEventOfYear = function(year) {
     // Get the first event of the year.
     var event = _.find(data.events, function(event) {
@@ -56,17 +60,19 @@
       year: currentYear,
       prevYearLink: getDateOfFirstEventOfYear(currentYear - 1),
       nextYearLink: getDateOfFirstEventOfYear(currentYear + 1),
-      monthsWithNameAndDays: getNamesAndDaysOfMonths(currentYear),
+      namesAndDaysOfMonths: getNamesAndDaysOfMonths(currentYear),
       dateHasEvent: dateHasEvent
     };
 
     $('#calendar').html(tmplCalendar(context));
 
+    // Add the link to get to the previous year.
     $('#PrevYear').click(function() {
       currentYear--;
       renderCalendar();
     });
  
+    // Add the link to get to the next year.
     $('#NextYear').click(function() {
       currentYear++;
       renderCalendar();
