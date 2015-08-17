@@ -1,0 +1,76 @@
+div {
+  box-sizing: border-box;
+  overflow:hidden;
+  padding: 10px;
+  word-wrap:break-word
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+.Calendar {
+  display: inline-block;
+  height: 800px;
+  vertical-align: top;
+  width: 600px;
+}
+
+.Chronological {
+  display: inline-block;
+  height: 800px;
+  overflow: scroll;
+  vertical-align: top;
+}
+
+.Cancelled {
+  text-decoration: line-through;
+}
+
+.Year {
+  display: block;
+  width: 600px;
+}
+
+.Month {
+  display: inline-block;
+  padding: 0 10px 10px 0;
+  vertical-align: top;
+  width: 185px;
+}
+
+.Day {
+  display: inline-block;
+  width: 20px;
+}
+
+.YearTitle {
+  font-weight: bold;
+  padding: 0 8px 0 8px;
+}
+
+.MonthTitle {
+  font-weight: bold;
+}
+
+.DayTitle {
+  display: inline-block;
+  padding: 2px;
+  width: 20px;
+}
+
+.DayTitle a {
+  background-color: yellow;
+}
+
+.ChronologicalTitle {
+  font-weight: bold;
+}
+

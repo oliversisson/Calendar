@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <title>Calendar</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div id="calendar" class="Calendar"></div>
+    <div id="chronological" class="Chronological"></div>
+
+    <script type="text/template" id="tmpl-calendar">
+      <center>
+        <a href="#<%= prevYearLink %>" id="PrevYear" class="YearLink">
+          <<
+        </a>
+        <span class="YearTitle"><%= year %></span>
+        <a href="#<%= nextYearLink %>" id="NextYear" class="YearLink">
+          >>
+        </a>
+      </center>
+      <div class="Year">
+        <% _.each(monthsWithNameAndDays, function(month, monthIndex) { %>
+          <div class="Month">
+            <div class="MonthTitle"><%= month[0] %></div>
+            <% _.each(_.range(1, month[1] + 1), function(day) { %>
+              <div class="DayTitle">
+                <% if(dateHasEvent[monthIndex][day]) { %>
+                  <% date = [year, monthIndex + 1, day].join('-'); %>
+                  <a href="#<%= date %>"><%= day %></a>
+                <% } else { %>
+                  <%= day %>
+                <% }; %>
+              </div>
+            <% }); %>
+          </div>
+        <% }); %>
+      </div>
+    </script>
+
+    <script type="text/template" id="tmpl-chronological">
+      <% var date, oldDate; %>
+      <% _.each(events, function(event) { %>
+        <% date = [event.year, event.month, event.day].join('-'); %>
+        <% if(date != oldDate) { %>
+          <div id="<%= date %>" class="ChronologicalTitle"><%= date %></div>
+          <% oldDate = date; %>
+        <% } %>
+        <div class="Event <%= event.cancelled ? 'Cancelled' : '' %>">
+          <span class="OccasionTitle">
+            <%= event.occasion %> (<%= event.invited_count %>)
+          </span>
+        </div>
+      <% }); %>
+    </script>
+                                            
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
+
